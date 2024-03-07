@@ -1,4 +1,26 @@
-.registration_form{
+.registration_form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  width: 30vw;
+  &-button_container {
     display: flex;
-    flex-direction: column;
+    justify-content: space-around;
+  }
+  &-date {
+    min-width: 200px;
+  }
+}
+
+.registration_form * {
+  margin-top: 10px;
+  .registration_form-password * {
+    margin-top: 0px;
+  }
+}
+.registration_form .registration_form-tel * {
+  margin-top: 0px;
+}
+.registration_form .registration_form .registration_form-date * {
+  margin-top: 0px;
 }

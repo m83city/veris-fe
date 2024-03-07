@@ -26,7 +26,7 @@ function RegistrationForm() {
     name: string;
     secondName: string;
     lastName: string;
-    dateOfBirdth: Date; // YYYY-MM-DD
+    dateOfBirdth: string;
     email: string;
     nickName: string;
     phoneNumber: string;
@@ -34,7 +34,7 @@ function RegistrationForm() {
   }
   const initialValues: IRegisterForm = {
     name: "",
-    dateOfBirdth: new Date(),
+    dateOfBirdth: "",
     email: "",
     lastName: "",
     nickName: "",
@@ -89,158 +89,187 @@ function RegistrationForm() {
   return (
     <Formik
       initialValues={initialValues}
-      onSubmit={(values, { setSubmitting }) => {
+      onSubmit={(values) => {
         console.log(values);
       }}
     >
-      {({ handleChange, values, setFieldValue, setValues }) => (
-        <Form className="registration_form">
-          <FormControl variant="outlined">
-            <InputLabel htmlFor="name">
-              {t("registrationForm.label.name")}
-            </InputLabel>
-            <OutlinedInput
-              label={t("registrationForm.label.name")}
-              name="name"
-              id="name"
-              aria-describedby="my-helper-text"
-              onChange={handleChange}
-            />
-            <ErrorMessage name="name" />
-          </FormControl>
+      {({ handleChange, values, setFieldValue, resetForm, setValues }) => (
+        <>
+          <Form className="registration_form">
+            <FormControl variant="outlined">
+              <InputLabel htmlFor="name">
+                {t("registrationForm.label.name")}
+              </InputLabel>
+              <OutlinedInput
+                value={values.name}
+                label={t("registrationForm.label.name")}
+                name="name"
+                id="name"
+                aria-describedby="my-helper-text"
+                onChange={handleChange}
+              />
+              <ErrorMessage name="name" />
+            </FormControl>
 
-          <FormControl variant="outlined">
-            <InputLabel htmlFor="secondName">
-              {t("registrationForm.label.secondName")}
-            </InputLabel>
-            <OutlinedInput
-              label={t("registrationForm.label.secondName")}
-              name="secondName"
-              id="secondName"
-              aria-describedby="my-helper-text"
-              onChange={handleChange}
-            />
-            <ErrorMessage name="secondName" />
-          </FormControl>
+            <FormControl variant="outlined">
+              <InputLabel htmlFor="secondName">
+                {t("registrationForm.label.secondName")}
+              </InputLabel>
+              <OutlinedInput
+                value={values.secondName}
+                label={t("registrationForm.label.secondName")}
+                name="secondName"
+                id="secondName"
+                aria-describedby="my-helper-text"
+                onChange={handleChange}
+              />
+              <ErrorMessage name="secondName" />
+            </FormControl>
 
-          <FormControl variant="outlined">
-            <InputLabel htmlFor="lastName">
-              {t("registrationForm.label.lastName")}
-            </InputLabel>
-            <OutlinedInput
-              label={t("registrationForm.label.lastName")}
-              name="lastName"
-              id="lastName"
-              aria-describedby="my-helper-text"
-              onChange={handleChange}
-            />
-            <ErrorMessage name="lastName" />
-          </FormControl>
+            <FormControl variant="outlined">
+              <InputLabel htmlFor="lastName">
+                {t("registrationForm.label.lastName")}
+              </InputLabel>
+              <OutlinedInput
+                value={values.lastName}
+                label={t("registrationForm.label.lastName")}
+                name="lastName"
+                id="lastName"
+                aria-describedby="my-helper-text"
+                onChange={handleChange}
+              />
+              <ErrorMessage name="lastName" />
+            </FormControl>
 
-          <FormControl variant="outlined">
-            <InputLabel htmlFor="nickName">
-              {t("registrationForm.label.nickName")}
-            </InputLabel>
-            <OutlinedInput
-              label={t("registrationForm.label.nickName")}
-              name="nickName"
-              id="nickName"
-              aria-describedby="my-helper-text"
-              onChange={handleChange}
-            />
-            <ErrorMessage name="nickName" />
-          </FormControl>
+            <FormControl variant="outlined">
+              <InputLabel htmlFor="nickName">
+                {t("registrationForm.label.nickName")}
+              </InputLabel>
+              <OutlinedInput
+                value={values.nickName}
+                label={t("registrationForm.label.nickName")}
+                name="nickName"
+                id="nickName"
+                aria-describedby="my-helper-text"
+                onChange={handleChange}
+              />
+              <ErrorMessage name="nickName" />
+            </FormControl>
 
-          <FormControl variant="outlined">
-            <InputLabel htmlFor="email">
-              {t("registrationForm.label.email")}
-            </InputLabel>
-            <OutlinedInput
-              label={t("registrationForm.label.email")}
-              name="email"
-              id="email"
-              aria-describedby="my-helper-text"
-              onChange={handleChange}
-            />
-            <FormHelperText id="name-helper-text">
-              {t("registrationForm.info.emailHelperText")}
-            </FormHelperText>
-            <ErrorMessage name="email" component="div" />
-          </FormControl>
+            <FormControl variant="outlined">
+              <InputLabel htmlFor="email">
+                {t("registrationForm.label.email")}
+              </InputLabel>
+              <OutlinedInput
+                value={values.email}
+                label={t("registrationForm.label.email")}
+                name="email"
+                id="email"
+                aria-describedby="my-helper-text"
+                onChange={handleChange}
+              />
+              <FormHelperText id="name-helper-text">
+                {t("registrationForm.info.emailHelperText")}
+              </FormHelperText>
+              <ErrorMessage name="email" component="div" />
+            </FormControl>
 
-          <MuiTelInput
-            value={values.phoneNumber}
-            name="phoneNumber"
-            id="phoneNumber"
-            onChange={(phoneNumber) =>
-              setFieldValue("phoneNumber", phoneNumber)
-            }
-          />
-
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DemoContainer components={["DatePicker"]}>
-              <DatePicker label="Basic date picker" />
-            </DemoContainer>
-          </LocalizationProvider>
-
-          <FormControl variant="outlined">
-            <InputLabel htmlFor="password">
-              {t("registrationForm.label.password")}
-            </InputLabel>
-            <OutlinedInput
-              label={t("registrationForm.label.password")}
-              name="password"
-              id="password"
-              aria-describedby="my-helper-text"
-              onChange={handleChange}
-              type={showPassword ? "text" : "password"}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    edge="end"
-                  >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
+            <MuiTelInput
+              className="registration_form-tel"
+              value={values.phoneNumber}
+              name="phoneNumber"
+              id="phoneNumber"
+              onChange={(phoneNumber) =>
+                setFieldValue("phoneNumber", phoneNumber)
               }
             />
-            <ErrorMessage name="password" />
-          </FormControl>
 
-          <FormControl variant="outlined">
-            <InputLabel htmlFor="confirmPassword">
-              {t("registrationForm.label.confirmPassword")}
-            </InputLabel>
-            <OutlinedInput
-              label={t("registrationForm.label.confirmPassword")}
-              name="confirmPassword"
-              id="confirmPassword"
-              aria-describedby="my-helper-text"
-              onChange={handleChange}
-              type={showPassword ? "text" : "password"}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    edge="end"
-                  >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              }
-            />
-            <ErrorMessage name="confirmPassword" />
-          </FormControl>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker
+                value={values.dateOfBirdth}
+                className="registration_form-date"
+                label={t("registrationForm.label.birth")}
+                onChange={(birthDay: any) =>
+                  setFieldValue("dateOfBirdth", birthDay)
+                }
+              />
+            </LocalizationProvider>
 
-          <Button variant="outlined" type="submit">
-            {t("registrationForm.label.submit")}
-          </Button>
-        </Form>
+            <FormControl variant="outlined">
+              <InputLabel htmlFor="password">
+                {t("registrationForm.label.password")}
+              </InputLabel>
+              <OutlinedInput
+                className="registration_form-password"
+                label={t("registrationForm.label.password")}
+                name="password"
+                id="password"
+                aria-describedby="my-helper-text"
+                onChange={handleChange}
+                type={showPassword ? "text" : "password"}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+              />
+              <ErrorMessage name="password" />
+            </FormControl>
+
+            <FormControl variant="outlined">
+              <InputLabel htmlFor="confirmPassword">
+                {t("registrationForm.label.confirmPassword")}
+              </InputLabel>
+              <OutlinedInput
+                className="registration_form-password registration_form-password_confirm"
+                label={t("registrationForm.label.confirmPassword")}
+                name="confirmPassword"
+                id="confirmPassword"
+                aria-describedby="my-helper-text"
+                onChange={handleChange}
+                type={showPassword ? "text" : "password"}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+              />
+              <ErrorMessage name="confirmPassword" />
+            </FormControl>
+            <div className="registration_form-button_container">
+              <Button
+                className="registration_form-sumbit"
+                variant="outlined"
+                type="submit"
+              >
+                {t("registrationForm.label.submit")}
+              </Button>
+              <Button
+                className="registration_form-reset"
+                variant="outlined"
+                type="button"
+                color="error"
+                onClick={() => resetForm()}
+              >
+                {t("registrationForm.label.reset")}
+              </Button>
+            </div>
+          </Form>
+        </>
       )}
     </Formik>
   );

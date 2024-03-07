@@ -27,7 +27,8 @@ i18n
                       password:"Password",
                       confirmPassword: "Confirm password",
                       submit: "Submit",
-                      birth:"Date birth"
+                      birth:"Date birth",
+                      reset:"Reset form"
                     },
                     error:{
                         min: "Too Short",
@@ -55,7 +56,8 @@ i18n
                       password:"Пароль",
                       confirmPassword:"Підтвердіть пароль",
                       submit: "Підтвердити",
-                      birth:"Дата народження"
+                      birth:"Дата народження",
+                      reset:"Скинути форму"
                     },
                     error:{
                         min: "Занадто коротке",
