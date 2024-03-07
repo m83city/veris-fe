@@ -9,10 +9,9 @@ import {
 } from "@mui/material";
 
 import { ErrorMessage, Form, Formik } from "formik";
-import { string, date, object } from "yup";
+import { string, date, object, ref } from "yup";
 import { useTranslation } from "react-i18next";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
-import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import "./RegistrationForm.scss";
 import { MuiTelInput } from "mui-tel-input";
@@ -31,6 +30,7 @@ function RegistrationForm() {
     nickName: string;
     phoneNumber: string;
     password: string;
+    confirmPassword: string;
   }
   const initialValues: IRegisterForm = {
     name: "",
@@ -41,6 +41,7 @@ function RegistrationForm() {
     phoneNumber: "",
     secondName: "",
     password: "",
+    confirmPassword: "",
   };
 
   const handleMouseDownPassword = (
@@ -51,19 +52,28 @@ function RegistrationForm() {
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-  const phoneRegExp =
-    /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
-
   const registrationSchema = object().shape({
     name: string()
+      .matches(
+        /^[^0-9_!@#$%^&*()<>?/|}{~:=+"]+$/,
+        t(t("registrationForm.error.name"))
+      )
       .min(2, t("registrationForm.error.min"))
       .max(50, t("registrationForm.error.max"))
       .required(t("registrationForm.error.required")),
     secondName: string()
+      .matches(
+        /^[^0-9_!@#$%^&*()<>?/|}{~:=+"]+$/,
+        t(t("registrationForm.error.name"))
+      )
       .min(2, t("registrationForm.error.min"))
       .max(50, t("registrationForm.error.max"))
       .required(t("registrationForm.error.required")),
     lastName: string()
+      .matches(
+        /^[^0-9_!@#$%^&*()<>?/|}{~:=+"]+$/,
+        t(t("registrationForm.error.name"))
+      )
       .min(2, t("registrationForm.error.min"))
       .max(50, t("registrationForm.error.max"))
       .required(t("registrationForm.error.required")),
@@ -75,15 +85,29 @@ function RegistrationForm() {
       .email(t("registrationForm.error.email"))
       .required(t("registrationForm.error.required")),
     dateOfBirdth: date()
-      .required()
+      .required(t("registrationForm.error.required"))
       .default(() => new Date()),
     phoneNumber: string()
-      .required()
-      .matches(phoneRegExp, "Phone number is not valid"),
+      .required(t("registrationForm.error.required"))
+      .min(16, t("registrationForm.error.phoneNumber"))
+      .max(16, t("registrationForm.error.phoneNumber")),
     password: string()
-      .required()
-      .min(6, t("registrationForm.error.min"))
-      .max(90, t("registrationForm.error.max")),
+      .required(t("registrationForm.error.required"))
+      .min(8, t("registrationForm.error.min"))
+      .max(90)
+      .matches(
+        /^[a-zA-Z0-9-_.!@#$%^&*(){}+=?]+$/,
+        t("registrationForm.error.password")
+      ),
+    confirmPassword: string()
+      .required(t("registrationForm.error.required"))
+      .min(8, t("registrationForm.error.min"))
+      .max(90)
+      .matches(
+        /^[a-zA-Z0-9-_.!@#$%^&*(){}+=?]+$/,
+        t("registrationForm.error.password")
+      )
+      .oneOf([ref("password")], t("registrationForm.error.passwordMatch")),
   });
 
   return (
@@ -92,6 +116,7 @@ function RegistrationForm() {
       onSubmit={(values) => {
         console.log(values);
       }}
+      validationSchema={registrationSchema}
     >
       {({ handleChange, values, setFieldValue, resetForm, setValues }) => (
         <>
@@ -173,16 +198,18 @@ function RegistrationForm() {
               </FormHelperText>
               <ErrorMessage name="email" component="div" />
             </FormControl>
-
-            <MuiTelInput
-              className="registration_form-tel"
-              value={values.phoneNumber}
-              name="phoneNumber"
-              id="phoneNumber"
-              onChange={(phoneNumber) =>
-                setFieldValue("phoneNumber", phoneNumber)
-              }
-            />
+            <>
+              <MuiTelInput
+                className="registration_form-tel"
+                value={values.phoneNumber}
+                name="phoneNumber"
+                id="phoneNumber"
+                onChange={(phoneNumber) =>
+                  setFieldValue("phoneNumber", phoneNumber)
+                }
+              />
+              <ErrorMessage name="phoneNumber" component="div" />
+            </>
 
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
@@ -193,6 +220,7 @@ function RegistrationForm() {
                   setFieldValue("dateOfBirdth", birthDay)
                 }
               />
+              <ErrorMessage name="dateOfBirdth" component="div" />
             </LocalizationProvider>
 
             <FormControl variant="outlined">

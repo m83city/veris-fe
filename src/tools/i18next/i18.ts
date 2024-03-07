@@ -31,14 +31,17 @@ i18n
                       reset:"Reset form"
                     },
                     error:{
+                        name:"Name/Surname cannot contain numbers or special characters",
                         min: "Too Short",
                         max: "Too Long",
                         required: "Required",
                         email : "Invalid e-mail",
-                        confirmPassword: "Password didn't match"
+                        confirmPassword: "Password didn't match",
+                        phoneNumber:"Phone number is not valid",
+                        password:"Password can publish only Latin letters, numbers and symbols: -_.!@#$%^&*(){}+=?",
+                        passwordMatch:"Passwords do not match"
                     },
                 }
-
             }
           },
           uk: {
@@ -60,14 +63,17 @@ i18n
                       reset:"Скинути форму"
                     },
                     error:{
+                        name:"Імʼя/Прізвище не може містити цифри чи спецсимволи",
                         min: "Занадто коротке",
                         max: "Занадто довге",
                         required: "Вимагається",
                         email : "Не вірний формат електронної адреси",
-                        confirmPassword: "Паролі не співпадають"
+                        confirmPassword: "Паролі не співпадають",
+                        phoneNumber:"Номер телефону не відповідний",
+                        password:"Пароль може містити тільки латинські літери цифри та символи: -_.!@#$%^&*(){}+=?",
+                        passwordMatch:"Паролі не збігаються"
                     },
                 }
-
             }
           },
     }

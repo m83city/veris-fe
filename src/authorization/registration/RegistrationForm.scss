@@ -7,9 +7,6 @@
     display: flex;
     justify-content: space-around;
   }
-  &-date {
-    min-width: 200px;
-  }
 }
 
 .registration_form * {
@@ -21,6 +18,9 @@
 .registration_form .registration_form-tel * {
   margin-top: 0px;
 }
-.registration_form .registration_form .registration_form-date * {
+.registration_form .registration_form-date * {
   margin-top: 0px;
+}
+.registration_form .registration_form-date {
+  margin-top: 10px;
 }
