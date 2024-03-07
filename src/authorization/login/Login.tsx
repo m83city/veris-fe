@@ -71,7 +71,7 @@ function Login() {
             <ErrorMessage name="password" component="div" />
           </FormControl>
           <FormControl variant="outlined">
-            <InputLabel htmlFor="name">Email address</InputLabel>
+            <InputLabel htmlFor="email">Email address</InputLabel>
             <OutlinedInput
               label="Email address"
               name="email"
