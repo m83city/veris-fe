@@ -228,6 +228,7 @@ function RegistrationForm() {
                 {t("registrationForm.label.password")}
               </InputLabel>
               <OutlinedInput
+                value={values.password}
                 className="registration_form-password"
                 label={t("registrationForm.label.password")}
                 name="password"
@@ -256,6 +257,7 @@ function RegistrationForm() {
                 {t("registrationForm.label.confirmPassword")}
               </InputLabel>
               <OutlinedInput
+                value={values.confirmPassword}
                 className="registration_form-password registration_form-password_confirm"
                 label={t("registrationForm.label.confirmPassword")}
                 name="confirmPassword"
