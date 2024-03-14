@@ -14,6 +14,9 @@ i18n
     resources: {
         en: {
             translation: {
+                selectorLanguage:{
+                  label: "Language"
+                },
                 registrationForm:{
                   info:{
                     emailHelperText: "We'll never share your email"
@@ -46,6 +49,9 @@ i18n
           },
           uk: {
             translation: {
+              selectorLanguage:{
+                label: "Мова"
+              },
                 registrationForm:{
                   info:{
                     emailHelperText: "Ми не поширюємо вашу електронну адресу"
