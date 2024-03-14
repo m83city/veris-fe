@@ -1,0 +1,23 @@
+.profile {
+  &Photo {
+    margin: 10px;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url(../tools/blank-profile-picture-973460_960_720.webp);
+  }
+  &Header {
+    display: flex;
+    justify-content: end;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url(../tools/what_is_image_Processing.avif);
+  }
+  &Names {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+  }
+}
